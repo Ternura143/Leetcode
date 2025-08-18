@@ -64,24 +64,41 @@
 
 # @lcpr-template-end
 # @lc code=start
+from collections import defaultdict
 from typing import List
 
 
 class Solution:
     def maxSum(self, nums: List[int], m: int, k: int) -> int:
-        ans = sum = 0
-        l = []
+        # ans = sum = 0
+        # l = []
+        # for i,x in enumerate(nums):
+        #     l.append(x)
+        #     sum += x
+        #     if i < k-1:
+        #         continue
+        #     if len(set(l)) >= m:    
+        #         ans = max(ans,sum)
+        #     l.pop(0)
+        #     sum -= nums[i-k+1]
+        # return ans
+        ans = s = 0
+        cnt = defaultdict(int)
         for i,x in enumerate(nums):
-            l.append(x)
-            sum += x
-            if i < k-1:
+            s += x
+            cnt[x] += 1
+            left = i-k+1
+            if left < 0:
                 continue
-            if len(set(l)) >= m:    
-                ans = max(ans,sum)
-            l.pop(0)
-            sum -= nums[i-k+1]
+
+            if len(cnt) >= m:
+                ans = max(ans, s)
+            out = nums[left]
+            s -= out
+            cnt[out] -= 1
+            if cnt[out] == 0:
+                del cnt[out]
         return ans
-            
         
         
 # @lc code=end

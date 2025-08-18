@@ -63,5 +63,5 @@ class Solution:
             cnt[out] -= 1
             if cnt[out] == 0:
                 del cnt[out]
-        return ans
+        return ans      
 ```
